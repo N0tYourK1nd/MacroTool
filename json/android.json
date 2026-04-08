@@ -1,0 +1,8 @@
+{
+    "APKTools":{
+        "Decompile APK":"apktool d <APPLICATION.APK>"
+    },
+    "Enumeration":{
+        "API Search":"grep -orP --text '.{0,30}DOMAIN.{0,60}'"
+    }
+}

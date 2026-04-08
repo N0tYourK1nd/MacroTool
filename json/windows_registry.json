@@ -1,0 +1,42 @@
+{
+  "Basics": {
+    "List Registry PSDrives": "Get-PSDrive -PSProvider Registry",
+    "Open Registry Editor": "regedit"
+  },
+  "Hives_Info": {
+    "List HKCU Root Keys": "Get-ChildItem HKCU:\\",
+    "List HKLM Root Keys": "Get-ChildItem HKLM:\\",
+    "List HKU Root Keys": "Get-ChildItem HKU:\\"
+  },
+  "Navigation": {
+    "Mount HKU PSDrive": "New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS",
+    "Set Location to Key": "Set-Location -Path <regpath>",
+    "Show Subkeys for Path": "Get-ChildItem -Path <regpath>"
+  },
+  "Query": {
+    "Get Key Properties (PowerShell)": "Get-ItemProperty -Path <regpath>",
+    "Get Specific Value (PowerShell)": "Get-ItemPropertyValue -Path <regpath> -Name <valuename>",
+    "Query Key (reg.exe)": "reg query <regkey>",
+    "Query Specific Value (reg.exe)": "reg query <regkey> /v <valuename>"
+  },
+  "Search": {
+    "Search Keys/Values (reg.exe recursive)": "reg query <regkey> /s /f \"<term>\"",
+    "Search Values (PowerShell recursive)": "Get-ChildItem -Path <regpath> -Recurse -ErrorAction SilentlyContinue | ForEach-Object { Get-ItemProperty -Path $_.PsPath -ErrorAction SilentlyContinue } | Out-String -Stream | Select-String -SimpleMatch <term>"
+  },
+  "Export_Import": {
+    "Export Key to .reg": "reg export <regkey> <outfile>",
+    "Export HKCU\\Software to .reg": "reg export HKCU\\Software <outfile>",
+    "Import .reg File": "reg import <regfile>"
+  },
+  "Modify_UserScope": {
+    "Create Key": "New-Item -Path <regpath> -Force",
+    "Create DWORD Value (REG_DWORD)": "New-ItemProperty -Path <regpath> -Name <name> -Value <number> -PropertyType DWord -Force",
+    "Create String Value (REG_SZ)": "New-ItemProperty -Path <regpath> -Name <name> -Value <data> -PropertyType String -Force",
+    "Remove Value": "Remove-ItemProperty -Path <regpath> -Name <name>",
+    "Remove Key (with children)": "Remove-Item -Path <regpath> -Recurse -Force"
+  },
+  "Permissions": {
+    "Get Key ACL": "Get-Acl -Path <regpath>",
+    "Set Key Owner (example pattern)": "$acl = Get-Acl -Path <regpath>; $acl.SetOwner([System.Security.Principal.NTAccount]'<owner>'); Set-Acl -Path <regpath> -AclObject $acl"
+  }
+}

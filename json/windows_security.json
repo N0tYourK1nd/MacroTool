@@ -1,0 +1,46 @@
+{
+    "Defender": {
+        "Add Exclusion Path": "Add-MpPreference -ExclusionPath <path>",
+        "Add Exclusion Process": "Add-MpPreference -ExclusionProcess <process>",
+        "Add Exclusion Extension": "Add-MpPreference -ExclusionExtension <ext>",
+        "Disable All Protections": "Set-MpPreference -DisableRealtimeMonitoring $true -DisableIOAVProtection $true -DisableIntrusionPreventionSystem $true -DisableScriptScanning $true -MAPSReporting Disabled -SubmitSamplesConsent NeverSend",        
+        "Disable Cloud Delivered Protection": "Set-MpPreference -MAPSReporting Disabled -SubmitSamplesConsent NeverSend",
+        "Disable IO AV Protection": "Set-MpPreference -DisableIOAVProtection $true -Verbose",
+        "Disable IPS": "Set-MpPreference -DisableIntrusionPreventionSystem $true -Verbose",
+        "Disable Real-time Protection": "Set-MpPreference -DisableRealtimeMonitoring $true -Verbose",
+        "Disable Script Scanning": "Set-MpPreference -DisableScriptScanning $true -Verbose",
+        "List Preferences": "Get-MpPreference",
+        "List Threats": "Get-MpThreat",
+        "Remove All Exclusions": "Set-MpPreference -ExclusionPath @() -ExclusionExtension @() -ExclusionProcess @()"
+
+    },
+    "Firewall": {
+        "Disable Firewall All Profiles": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False",
+        "Enable Firewall All Profiles": "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True",
+        "Show Firewall Status": "Get-NetFirewallProfile | Format-Table Name, Enabled"
+    },
+    "UAC": {
+        "Disable UAC (Registry)": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System' -Name EnableLUA -Value 0",
+        "Enable UAC (Registry)": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System' -Name EnableLUA -Value 1",
+        "Get UAC Status": "Get-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System' -Name EnableLUA"
+    },
+    "BitLocker": {
+        "Check BitLocker Status": "Get-BitLockerVolume",
+        "Enable BitLocker": "Enable-BitLocker -MountPoint <drive> -RecoveryPasswordProtector",
+        "Suspend BitLocker": "Suspend-BitLocker -MountPoint <drive>"
+    },
+    "Audit": {
+        "List Audit Policies": "auditpol /get /category:*",
+        "Disable All Audit Policies": "auditpol /clear /y",
+        "Enable All Audit Policies": "auditpol /set /category:* /success:enable /failure:enable"
+    },
+    "AppLocker": {
+        "List AppLocker Policies": "Get-AppLockerPolicy -Effective -Xml",
+        "Export AppLocker Policy": "Get-AppLockerPolicy -Effective | Out-File C:\\applocker.xml",
+        "Import AppLocker Policy": "Set-AppLockerPolicy -PolicyObject (Get-AppLockerPolicy -XmlPolicy C:\\applocker.xml) -Merge"
+    },
+    "CredentialGuard": {
+        "Check CredentialGuard Status": "Get-WmiObject -Class Win32_DeviceGuard -Namespace root\\Microsoft\\Windows\\DeviceGuard",
+        "Disable CredentialGuard": "bcdedit /set hypervisorlaunchtype off"
+    }
+}

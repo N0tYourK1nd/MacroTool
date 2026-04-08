@@ -1,0 +1,5 @@
+{
+	"Enumeration":{
+		"Privesc Check - Extended + Reports":"powershell -ep bypass -c \". .\\PrivescCheck.ps1; Invoke-PrivescCheck -Extended -Report PrivescCheck_$($env:COMPUTERNAME) -Format TXT,HTML\""
+	}
+}

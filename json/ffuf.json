@@ -1,0 +1,9 @@
+{
+  "ffuf": {
+    "Dir Bust (Simple)": "ffuf -u http://<host>/FUZZ -w <wordlist> -mc 200,204,301,302,307,401,403 -o ffuf.dir.<host>.json",
+    "Dir Bust (Extensions)": "ffuf -u http://<host>/FUZZ -w <wordlist> -e .php,.txt,.bak,.old -mc 200,204,301,302,307,401,403 -o ffuf.dir.ext.<host>.json",
+    "VHost Bust": "ffuf -u http://<host>/ -H 'Host: FUZZ.<host>' -w <wordlist> -fw 0 -o ffuf.vhost.<host>.json",
+    "Parameter Fuzz": "ffuf -u 'http://<host>/index.php?FUZZ=test' -w <wordlist> -mc 200 -o ffuf.param.<host>.json",
+    "Wordlist Discovery (404 filter by size)": "ffuf -u http://<host>/FUZZ -w <wordlist> -fs <bytes> -o ffuf.dir.fs.<host>.json"
+  }
+}

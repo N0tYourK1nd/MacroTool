@@ -1,0 +1,9 @@
+{
+    "Administrator":{
+        "Admin Desktop":"cd C:\\Users\\Administrator\\Desktop\\",
+        "Admin Documents":"cd C:\\Users\\Administrator\\Documents\\"
+    },
+    "Windows":{
+        "Tasks Folder (AppLocker)":"cd C:\\Windows\\Tasks"
+    }
+}

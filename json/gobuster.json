@@ -1,0 +1,9 @@
+{
+  "gobuster": {
+    "Dir Bust (Common Wordlist)": "gobuster dir -u http://<host>/ -w <wordlist> -t 50 -o gobuster.dir.<host>.txt",
+    "Dir Bust (Extensions)": "gobuster dir -u http://<host>/ -w <wordlist> -x php,txt,asp,aspx,jsp -t 50 -o gobuster.dir.ext.<host>.txt",
+    "VHost Bust (HTTP)": "gobuster vhost -u http://<host>/ -w <wordlist> -t 50 -o gobuster.vhost.http.<host>.txt",
+    "VHost Bust (HTTPS)": "gobuster vhost -u https://<host>/ -w <wordlist> -t 50 -o gobuster.vhost.https.<host>.txt",
+    "DNS Subdomains": "gobuster dns -d <domain> -w <wordlist> -t 50 -o gobuster.dns.<domain>.txt"
+  }
+}

