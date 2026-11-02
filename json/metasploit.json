@@ -21,8 +21,6 @@
     "Uploads":
     {
         "Linpeas":"upload /usr/share/peass/linpeas/linpeas.sh /tmp/linpeas.sh",
-        "Winpeas":"upload /usr/share/peass/winpeas/winPEASany.exe C:\\Windows\\Tasks\\winpeas.exe",
-        "Ligolo Agent (Windows)":"upload ~/BITREAVER-TOOLS/Windows/Binaries/ligolo-agent.exe C:\\Windows\\Tasks\\ligolo.exe",
-        "Ligolo Agent (Linux)":"upload ~/BITREAVER-TOOLS/Windows/Binaries/ligolo-agent /tmp/ligolo"
+        "Winpeas":"upload /usr/share/peass/winpeas/winPEASany.exe C:\\Windows\\Tasks\\winpeas.exe"
     }
 }
